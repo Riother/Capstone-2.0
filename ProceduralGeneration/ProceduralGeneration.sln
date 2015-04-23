@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ProceduralGeneration", "ProceduralGeneration\ProceduralGeneration.vcxproj", "{879647BA-6B31-4EBE-B666-5CE838ABB492}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Renderer", "Renderer\Renderer.vcxproj", "{0B68F9F3-2BB5-40D5-88E0-51B82E007841}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{879647BA-6B31-4EBE-B666-5CE838ABB492}.Debug|Win32.ActiveCfg = Debug|Win32
+		{879647BA-6B31-4EBE-B666-5CE838ABB492}.Debug|Win32.Build.0 = Debug|Win32
+		{879647BA-6B31-4EBE-B666-5CE838ABB492}.Release|Win32.ActiveCfg = Release|Win32
+		{879647BA-6B31-4EBE-B666-5CE838ABB492}.Release|Win32.Build.0 = Release|Win32
+		{0B68F9F3-2BB5-40D5-88E0-51B82E007841}.Debug|Win32.ActiveCfg = Debug|Win32
+		{0B68F9F3-2BB5-40D5-88E0-51B82E007841}.Debug|Win32.Build.0 = Debug|Win32
+		{0B68F9F3-2BB5-40D5-88E0-51B82E007841}.Release|Win32.ActiveCfg = Release|Win32
+		{0B68F9F3-2BB5-40D5-88E0-51B82E007841}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
