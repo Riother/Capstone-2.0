@@ -54,6 +54,69 @@
     <ClCompile Include="DungeonRoom.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="LabeledCheckBox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LabeledCheckBox_moc.cpp">
+      <Filter>Moc Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeometryEditor_moc.cpp">
+      <Filter>Moc Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Cell.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Dungeon.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Dungeon_moc.cpp">
+      <Filter>Moc Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DungeonGraph.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DungeonGraph_moc.cpp">
+      <Filter>Moc Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Cube.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CylinderBuilder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CubeBuilder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SphereBuilder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DomeBuilder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CorridorFloorTextureEditor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DungeonMaker.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CorridorFloorTextureEditor_moc.cpp">
+      <Filter>Moc Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DungeonMaker_moc.cpp">
+      <Filter>Moc Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RoomFloorTextureEditor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RoomFloorTextureEditor_moc.cpp">
+      <Filter>Moc Files</Filter>
+    </ClCompile>
+    <ClCompile Include="WallTextureEditor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="WallTextureEditor_moc.cpp">
+      <Filter>Moc Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Plane.h">
@@ -80,12 +143,63 @@
     <ClInclude Include="DungeonRoom.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="LabeledCheckBox.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dungeon.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Cell.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DungeonGraph.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DungeonNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Cube.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CylinderBuilder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CubeBuilder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SphereBuilder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DomeBuilder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CorridorFloorTextureEditor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DungeonMaker.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RoomFloorTextureEditor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WallTextureEditor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="SimpleFragmentShaderCode.glsl">
       <Filter>Shader Code</Filter>
     </None>
     <None Include="SimpleVertexShaderCode.glsl">
+      <Filter>Shader Code</Filter>
+    </None>
+    <None Include="SimpleGeometryShaderCode.glsl">
+      <Filter>Shader Code</Filter>
+    </None>
+    <None Include="LightFragmentShaderCode.glsl">
+      <Filter>Shader Code</Filter>
+    </None>
+    <None Include="LightVertexShaderCode.glsl">
       <Filter>Shader Code</Filter>
     </None>
   </ItemGroup>

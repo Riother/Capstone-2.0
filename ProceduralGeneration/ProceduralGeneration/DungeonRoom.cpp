@@ -9,11 +9,13 @@ const glm::mat4 BACK_WALL_TRANSFORM  = glm::translate(glm::vec3(0, 0, 0)) * glm:
 
 DungeonRoom::DungeonRoom(bool showRoof)
 {
+	text = -1;
 	this->showRoof = showRoof;
 }
 
 DungeonRoom::DungeonRoom(std::vector<GeometryInfo*> walls, bool showRoof)
 {
+	text = -1;
 	this->walls = walls;
 	this->showRoof = showRoof;
 	CreateSquareRoom();
@@ -25,6 +27,12 @@ DungeonRoom::DungeonRoom(std::vector<GeometryInfo*> walls)
 	CreateDomeRoom();
 }
 
+DungeonRoom::DungeonRoom(GeometryInfo* sphere)
+{
+	this->walls.push_back(sphere);
+	CreateSphere();
+}
+
 void DungeonRoom::CreateSquareRoom()
 {
 	ShaderInfo* shader = RENDERER.createShaderInfo("SimpleVertexShaderCode.glsl", "SimpleFragmentShaderCode.glsl");
@@ -32,27 +40,27 @@ void DungeonRoom::CreateSquareRoom()
 
 	topWall   = walls[0];
 	AddShaderStreamedParameters(topWall);
-	top = RENDERER.addRenderable(topWall, TOP_WALL_TRANSFORM, shader, showRoof, Vector4(1, 0, 0, 1), -1, false);
+	top = RENDERER.addRenderable(topWall, TOP_WALL_TRANSFORM, shader, showRoof, Vector4(1, 0, 0, 1), text, false);
 
 	leftWall  = walls[1];
 	AddShaderStreamedParameters(leftWall);
-	left = RENDERER.addRenderable(leftWall, LEFT_WALL_TRANSFORM, shader, showWalls, Vector4(0, 1, 0, 1), -1, false);
+	left = RENDERER.addRenderable(leftWall, LEFT_WALL_TRANSFORM, shader, showWalls, Vector4(0, 1, 0, 1), text, false);
 
 	rightWall = walls[2];
 	AddShaderStreamedParameters(rightWall);
-	right = RENDERER.addRenderable(rightWall, RIGHT_WALL_TRANSFORM, shader, showWalls, Vector4(1, 0, 1, 1), -1, false);
+	right = RENDERER.addRenderable(rightWall, RIGHT_WALL_TRANSFORM, shader, showWalls, Vector4(1, 0, 1, 1), text, false);
 
 	botWall   = walls[3];
 	AddShaderStreamedParameters(botWall);
-	bot = RENDERER.addRenderable(botWall, BOT_WALL_TRANSFORM, shader, showWalls, Vector4(0, 1, 1, 1), -1, false);
+	bot = RENDERER.addRenderable(botWall, BOT_WALL_TRANSFORM, shader, showWalls, Vector4(0, 1, 1, 1), text, false);
 
 	frontWall = walls[4];
 	AddShaderStreamedParameters(frontWall);
-	front = RENDERER.addRenderable(frontWall, FRONT_WALL_TRANSFORM, shader, showWalls, Vector4(0, 0, 1, 1), -1, false);
+	front = RENDERER.addRenderable(frontWall, FRONT_WALL_TRANSFORM, shader, showWalls, Vector4(0, 0, 1, 1), text, false);
 
 	backWall  = walls[5];
 	AddShaderStreamedParameters(backWall);
-	back = RENDERER.addRenderable(backWall, BACK_WALL_TRANSFORM, shader, showWalls, Vector4(1, 1, 0, 1), -1, false);
+	back = RENDERER.addRenderable(backWall, BACK_WALL_TRANSFORM, shader, showWalls, Vector4(1, 1, 0, 1), text, false);
 }
 
 void DungeonRoom::CreateDomeRoom()
@@ -62,11 +70,17 @@ void DungeonRoom::CreateDomeRoom()
 
 	topWall   = walls[0];
 	AddShaderStreamedParameters(topWall);
-	top = RENDERER.addRenderable(topWall, TOP_WALL_TRANSFORM, shader, showRoof, Vector4(1, 0, 0, 1), -1, false);
+	top = RENDERER.addRenderable(topWall, TOP_WALL_TRANSFORM, shader, showRoof, Vector4(1, 0, 0, 1), text, false);
+}
 
-	botWall   = walls[1];
-	AddShaderStreamedParameters(botWall);
-	bot = RENDERER.addRenderable(botWall, BOT_WALL_TRANSFORM, shader, showWalls, Vector4(0, 1, 1, 1), -1, false);
+void DungeonRoom::CreateSphere()
+{
+	ShaderInfo* shader = RENDERER.createShaderInfo("SimpleVertexShaderCode.glsl", "SimpleFragmentShaderCode.glsl");
+	bool showWalls = true;
+
+	topWall   = walls[0];
+	AddShaderStreamedParameters(topWall);
+	top = RENDERER.addRenderable(topWall, TOP_WALL_TRANSFORM, shader, showRoof, Vector4(1, 0, 0, 1), text, false);
 }
 
 void DungeonRoom::AddShaderStreamedParameters(GeometryInfo* info)

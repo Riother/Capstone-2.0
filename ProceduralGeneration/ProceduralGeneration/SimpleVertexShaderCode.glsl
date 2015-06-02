@@ -12,12 +12,18 @@ out vec4 theColor;
 out vec3 theNormal;
 out vec2 theUV;
 
+out there
+{
+	vec3 theNormal;
+}here;
+
 void main()
 {
 	gl_Position = transformation * vec4(position, 1);
-
 	thePosition = position;
 	theColor = color;
 	theNormal = normal;
 	theUV = uv;
+
+	here.theNormal = normal;
 }

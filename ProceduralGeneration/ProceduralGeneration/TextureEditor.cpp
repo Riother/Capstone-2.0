@@ -2,71 +2,77 @@
 
 TextureEditor::TextureEditor()
 {
-	mainLayout = new QHBoxLayout;
-	mainWidget = new QWidget;
-
-	red = new LabeledSpinbox("Red", true, 0, 255, 1);
-	green = new LabeledSpinbox("Green", true, 0, 255, 1);
-	blue = new LabeledSpinbox("Blue", true, 0, 255, 1);
-	alpha = new LabeledSpinbox("Alpha", true, 1, 255, 1);
-	sinFrequency = new LabeledSpinbox("Frequency", true, 1, 10, 1);
-	marbleFrequency = new LabeledSpinbox("Marble Frequency", true, 10, 100, 1);
-
-	rendererLayout = new QVBoxLayout;
-	guiLayout = new QVBoxLayout;
-
-	mainLayout->addLayout(guiLayout);
-	mainLayout->addLayout(rendererLayout);
-
-	guiLayout->addWidget(red);
-	guiLayout->addWidget(green);
-	guiLayout->addWidget(blue);
-	guiLayout->addWidget(alpha);
-	guiLayout->addWidget(sinFrequency);
-	guiLayout->addWidget(marbleFrequency);
-
-	rendererLayout->addWidget(&RENDERER);
-	RENDERER.setMinimumSize(700, 600);
-	mainWidget->setLayout(mainLayout);
-
-	setCentralWidget(mainWidget);
-	show();
-	
-	connect(red, SIGNAL(valueChanged()), this, SLOT(updateColors()));
-	connect(green, SIGNAL(valueChanged()), this, SLOT(updateColors()));
-	connect(blue, SIGNAL(valueChanged()), this, SLOT(updateColors()));
-	connect(alpha, SIGNAL(valueChanged()), this, SLOT(updateColors()));
-	connect(sinFrequency, SIGNAL(valueChanged()), this, SLOT(updateColors()));
-	connect(marbleFrequency, SIGNAL(valueChanged()), this, SLOT(updateColors()));
-
-	Plane plane;
-	GeometryInfo* planeInfo = RENDERER.addGeometry(plane.vertices, plane.SIZE * sizeof(Vertex), plane.indices, plane.AMOUNT_OF_VERTICES, GL_TRIANGLES);
-
-	ShaderInfo* shaderInfo = RENDERER.createShaderInfo("SimpleVertexShaderCode.glsl", "SimpleFragmentShaderCode.glsl");
-	Matrix4 position = glm::translate(Vector3(0, 0, 0)) * glm::scale(glm::vec3(0.5f, 0.5f, 0.5f));
-
-	RENDERER.addShaderStreamedParameter(planeInfo, 0, ParameterType::PT_VECTOR3, Vertex::POSITION_OFFSET, Vertex::STRIDE);
-	RENDERER.addShaderStreamedParameter(planeInfo, 1, ParameterType::PT_VECTOR3, Vertex::COLOR_OFFSET,    Vertex::STRIDE);
-	RENDERER.addShaderStreamedParameter(planeInfo, 2, ParameterType::PT_VECTOR3, Vertex::NORMAL_OFFSET,   Vertex::STRIDE);
-	RENDERER.addShaderStreamedParameter(planeInfo, 3, ParameterType::PT_VECTOR3, Vertex::UV_OFFSET,       Vertex::STRIDE);
-
-	bool isVisible = true;
-	
-	testPlane = RENDERER.addRenderable(planeInfo, position, shaderInfo, isVisible, Vector4(1, 1, 1, 1.0f), RENDERER.addTexture(GenerateBasePerlinNoise()), false);
+	//mainLayout = new QHBoxLayout;
+	//mainWidget = new QWidget;
+	//
+	//red = new LabeledSpinbox("Red", true, 0, 255, 1);
+	//green = new LabeledSpinbox("Green", true, 0, 255, 1);
+	//blue = new LabeledSpinbox("Blue", true, 0, 255, 1);
+	//alpha = new LabeledSpinbox("Alpha", true, 1, 255, 1);
+	//sinFrequency = new LabeledSpinbox("Frequency", true, 1, 10, 1);
+	//marbleFrequency = new LabeledSpinbox("Marble Frequency", true, 10, 100, 1);
+	//
+	//rendererLayout = new QVBoxLayout;
+	//guiLayout = new QVBoxLayout;
+	//
+	//mainLayout->addLayout(guiLayout);
+	//mainLayout->addLayout(rendererLayout);
+	//
+	//guiLayout->addWidget(red);
+	//guiLayout->addWidget(green);
+	//guiLayout->addWidget(blue);
+	//guiLayout->addWidget(alpha);
+	//guiLayout->addWidget(sinFrequency);
+	//guiLayout->addWidget(marbleFrequency);
+	//
+	//rendererLayout->addWidget(&RENDERER);
+	//RENDERER.setMinimumSize(700, 600);
+	//mainWidget->setLayout(mainLayout);
+	//
+	//setCentralWidget(mainWidget);
+	//show();
+	//
+	//connect(red, SIGNAL(valueChanged()), this, SLOT(updateColors()));
+	//connect(green, SIGNAL(valueChanged()), this, SLOT(updateColors()));
+	//connect(blue, SIGNAL(valueChanged()), this, SLOT(updateColors()));
+	//connect(alpha, SIGNAL(valueChanged()), this, SLOT(updateColors()));
+	//connect(sinFrequency, SIGNAL(valueChanged()), this, SLOT(updateColors()));
+	//connect(marbleFrequency, SIGNAL(valueChanged()), this, SLOT(updateColors()));
+	//
+	//Cube cube;
+	//GeometryInfo* info = RENDERER.addGeometry(cube.vertices, cube.SIZE * sizeof(Vertex), cube.indices, cube.AMOUNT_OF_VERTICES, GL_TRIANGLES);
+	//ShaderInfo* shader = RENDERER.createShaderInfo("SimpleVertexShaderCode.glsl", "LightFragmentShaderCode.glsl");
+	//Matrix4 lposition = glm::translate(Vector3(0, 0, 0)) * glm::scale(glm::vec3(0.5f, 0.5f, 0.5f));
+	//bool isVisible = true;
+	//AddShaderStreamedParameters(info);
+	//RENDERER.addRenderable(info, lposition, shader, isVisible, glm::vec4(0, 1, 0, 1), -2);
+	//
+	//
+	//Plane plane;
+	//GeometryInfo* planeInfo = RENDERER.addGeometry(plane.vertices, plane.SIZE * sizeof(Vertex), plane.indices, plane.AMOUNT_OF_VERTICES, GL_TRIANGLES);
+	////* shapeInfo = geo.MakeColumn();
+	//
+	//ShaderInfo* shaderInfo = RENDERER.createShaderInfo("SimpleVertexShaderCode.glsl", "SimpleFragmentShaderCode.glsl");//, "SimpleGeometryShaderCode.glsl");
+	//Matrix4 position = glm::translate(Vector3(0, 0, 0));// * glm::scale(glm::vec3(0.5f, 0.5f, 0.5f));
+	//
+	//AddShaderStreamedParameters(planeInfo);
+	//
+	//shape = RENDERER.addRenderable(planeInfo, position, shaderInfo, isVisible, Vector4(1, 1, 1, 1.0f), RENDERER.addTexture(GenerateBasePerlinNoise()), false);
 }
 
-void TextureEditor::updateColors()
-{
-	testPlane->textureID = RENDERER.addTexture(MarbleType2(255, 255, red->getSpinboxValue(), green->getSpinboxValue(), blue->getSpinboxValue(), alpha->getSpinboxValue(), marbleFrequency->getSpinboxValue(), sinFrequency->getSpinboxValue()));
-	//testPlane->textureID = RENDERER.addTexture(Sin(255, 255, red->getSpinboxValue(), green->getSpinboxValue(), blue->getSpinboxValue(), alpha->getSpinboxValue(), sinFrequency->getSpinboxValue()));
-	//testPlane->textureID = RENDERER.addTexture(TiledPatterOne(255, 255, red->getSpinboxValue(), green->getSpinboxValue(), blue->getSpinboxValue(), alpha->getSpinboxValue()));
-
-	float x = (float)red->getSpinboxValue() / (float)255;
-	float y = (float)green->getSpinboxValue() / (float)255;
-	float z = (float)blue->getSpinboxValue() / (float)255;
-	float w = (float)alpha->getSpinboxValue() / (float)255;
-	testPlane->color = Vector4(x, y, z, w);
-}
+//void TextureEditor::updateColors()
+//{
+//	//shape->textureID = RENDERER.addTexture(MarbleType2(255, 255, red->getSpinboxValue(), green->getSpinboxValue(), blue->getSpinboxValue(), alpha->getSpinboxValue(), marbleFrequency->getSpinboxValue(), sinFrequency->getSpinboxValue()));
+//	shape->textureID = RENDERER.addTexture(WoodType1(255, 255, red->getSpinboxValue(), green->getSpinboxValue(), blue->getSpinboxValue(), alpha->getSpinboxValue(), marbleFrequency->getSpinboxValue()));
+//	//testPlane->textureID = RENDERER.addTexture(Sin(255, 255, red->getSpinboxValue(), green->getSpinboxValue(), blue->getSpinboxValue(), alpha->getSpinboxValue(), sinFrequency->getSpinboxValue()));
+//	//testPlane->textureID = RENDERER.addTexture(TiledPatterOne(255, 255, red->getSpinboxValue(), green->getSpinboxValue(), blue->getSpinboxValue(), alpha->getSpinboxValue()));
+//
+//	float x = (float)red->getSpinboxValue() / (float)255;
+//	float y = (float)green->getSpinboxValue() / (float)255;
+//	float z = (float)blue->getSpinboxValue() / (float)255;
+//	float w = (float)alpha->getSpinboxValue() / (float)255;
+//	shape->color = Vector4(x, y, z, w);
+//}
 
 QImage TextureEditor::UtilImageToQImage(noise::utils::Image image)
 {
@@ -241,12 +247,21 @@ QImage TextureEditor::WoodType1(int width, int height, int red, int green, int b
 			double value3 = (double)(x +  y) / (double)woodFrequency;
 			double noiseValue = noiseGenerator.GetValue(value1, value2, value3);
 
-			double mod = x / woodFrequency;
-			int sinValue = 2 * (mod - floor(0.5 + mod));
+			double mod = (double)x / woodFrequency;
+			double floored = floor(0.5f + mod);
+			int sinValue = 2.0 * (mod - floored);
 			int gray = qGray(sinValue, sinValue, sinValue);
 			newImage.setPixel(x, y, QColor(gray, gray, gray, gray).rgba());
 		}
 	}
 
 	return newImage;
+}
+
+void TextureEditor::AddShaderStreamedParameters(GeometryInfo* info)
+{
+	RENDERER.addShaderStreamedParameter(info, 0, ParameterType::PT_VECTOR3, Vertex::POSITION_OFFSET, Vertex::STRIDE);
+	RENDERER.addShaderStreamedParameter(info, 1, ParameterType::PT_VECTOR3, Vertex::COLOR_OFFSET,    Vertex::STRIDE);
+	RENDERER.addShaderStreamedParameter(info, 2, ParameterType::PT_VECTOR3, Vertex::NORMAL_OFFSET,   Vertex::STRIDE);
+	RENDERER.addShaderStreamedParameter(info, 3, ParameterType::PT_VECTOR3, Vertex::UV_OFFSET,       Vertex::STRIDE);
 }

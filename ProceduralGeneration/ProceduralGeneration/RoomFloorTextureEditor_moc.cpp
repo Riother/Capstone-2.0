@@ -1,15 +1,15 @@
 /****************************************************************************
-** Meta object code from reading C++ file 'RendererWindow.h'
+** Meta object code from reading C++ file 'RoomFloorTextureEditor.h'
 **
-** Created: Wed May 20 13:18:02 2015
+** Created: Mon Jun 1 06:10:48 2015
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.0)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include "RendererWindow.h"
+#include "RoomFloorTextureEditor.h"
 #if !defined(Q_MOC_OUTPUT_REVISION)
-#error "The header file 'RendererWindow.h' doesn't include <QObject>."
+#error "The header file 'RoomFloorTextureEditor.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 63
 #error "This file was generated using the moc from 4.8.0. It"
 #error "cannot be used with the include files from this version of Qt."
@@ -17,7 +17,7 @@
 #endif
 
 QT_BEGIN_MOC_NAMESPACE
-static const uint qt_meta_data_RendererWindow[] = {
+static const uint qt_meta_data_RoomFloorTextureEditor[] = {
 
  // content:
        6,       // revision
@@ -31,57 +31,57 @@ static const uint qt_meta_data_RendererWindow[] = {
        0,       // signalCount
 
  // slots: signature, parameters, type, tag, flags
-      16,   15,   15,   15, 0x08,
+      24,   23,   23,   23, 0x08,
 
        0        // eod
 };
 
-static const char qt_meta_stringdata_RendererWindow[] = {
-    "RendererWindow\0\0Update()\0"
+static const char qt_meta_stringdata_RoomFloorTextureEditor[] = {
+    "RoomFloorTextureEditor\0\0update()\0"
 };
 
-void RendererWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+void RoomFloorTextureEditor::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     if (_c == QMetaObject::InvokeMetaMethod) {
         Q_ASSERT(staticMetaObject.cast(_o));
-        RendererWindow *_t = static_cast<RendererWindow *>(_o);
+        RoomFloorTextureEditor *_t = static_cast<RoomFloorTextureEditor *>(_o);
         switch (_id) {
-        case 0: _t->Update(); break;
+        case 0: _t->update(); break;
         default: ;
         }
     }
     Q_UNUSED(_a);
 }
 
-const QMetaObjectExtraData RendererWindow::staticMetaObjectExtraData = {
+const QMetaObjectExtraData RoomFloorTextureEditor::staticMetaObjectExtraData = {
     0,  qt_static_metacall 
 };
 
-const QMetaObject RendererWindow::staticMetaObject = {
-    { &QGLWidget::staticMetaObject, qt_meta_stringdata_RendererWindow,
-      qt_meta_data_RendererWindow, &staticMetaObjectExtraData }
+const QMetaObject RoomFloorTextureEditor::staticMetaObject = {
+    { &QWidget::staticMetaObject, qt_meta_stringdata_RoomFloorTextureEditor,
+      qt_meta_data_RoomFloorTextureEditor, &staticMetaObjectExtraData }
 };
 
 #ifdef Q_NO_DATA_RELOCATION
-const QMetaObject &RendererWindow::getStaticMetaObject() { return staticMetaObject; }
+const QMetaObject &RoomFloorTextureEditor::getStaticMetaObject() { return staticMetaObject; }
 #endif //Q_NO_DATA_RELOCATION
 
-const QMetaObject *RendererWindow::metaObject() const
+const QMetaObject *RoomFloorTextureEditor::metaObject() const
 {
     return QObject::d_ptr->metaObject ? QObject::d_ptr->metaObject : &staticMetaObject;
 }
 
-void *RendererWindow::qt_metacast(const char *_clname)
+void *RoomFloorTextureEditor::qt_metacast(const char *_clname)
 {
     if (!_clname) return 0;
-    if (!strcmp(_clname, qt_meta_stringdata_RendererWindow))
-        return static_cast<void*>(const_cast< RendererWindow*>(this));
-    return QGLWidget::qt_metacast(_clname);
+    if (!strcmp(_clname, qt_meta_stringdata_RoomFloorTextureEditor))
+        return static_cast<void*>(const_cast< RoomFloorTextureEditor*>(this));
+    return QWidget::qt_metacast(_clname);
 }
 
-int RendererWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+int RoomFloorTextureEditor::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
-    _id = QGLWidget::qt_metacall(_c, _id, _a);
+    _id = QWidget::qt_metacall(_c, _id, _a);
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {

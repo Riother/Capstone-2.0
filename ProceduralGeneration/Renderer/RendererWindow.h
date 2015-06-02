@@ -31,8 +31,8 @@ class RendererWindow : public QGLWidget
 {
 	Q_OBJECT
 
-	static const int MAX_INFOS = 10;
-	static const int MAX_RENDERABLES = 1000;
+	static const int MAX_INFOS = 30;
+	static const int MAX_RENDERABLES = 3000;
 	static const int MAX_DIMENSION_VALUE = 25;
 	//Voxel Cubes[MAX_DIMENSION_VALUE][MAX_DIMENSION_VALUE][MAX_DIMENSION_VALUE];
 	QList<RenderableInfo> characters;
@@ -40,8 +40,10 @@ class RendererWindow : public QGLWidget
 	int mapLength;
 	int mapWidth;
 	int mapHeight;
+	int lightLocation;
 	float cameraSpeed;
 	bool leftClick;
+	//glm::vec3 lightPosition;
 	Vector4 highlightedColor;
 	
 private:
@@ -58,6 +60,7 @@ public:
 	Camera camera;
 	bool setVisibility;
 	int renderableCount;
+	int lightCount;
 	int geometryCount;
 	int shaderCount;
 	void initializeGL();
@@ -68,25 +71,16 @@ public:
 	GeometryInfo geometryInfos[MAX_INFOS];
 	ShaderInfo shaderInfos[MAX_INFOS];
 	RenderableInfo renderableInfos[MAX_RENDERABLES];
+	RenderableInfo lightInfos[MAX_RENDERABLES];
 	GLuint frameBufferID;
 	GLuint colorTextureID;
 	GLuint depthTextureID;
-	int mapSizeX;
-	int mapSizeY;
-	int mapSizeZ;
-	bool is3D;
-	bool isCharSelection;
-	bool isMovement;
-	bool isAttack;
-	bool isEditor;
-	int selectedX;
-	int selectedY;
-	int selectedZ;
 
 	GeometryInfo* addGeometry(const void* verts, GLuint vertexDataSize, ushort* indices, glm::uint numIndices, GLuint indexingMode);
-	ShaderInfo* createShaderInfo(const char* vertexShaderCode, const char* fragmentShaderCode);
+	ShaderInfo* createShaderInfo(const char* vertexShaderCode, const char* fragmentShaderCode, const char* geometryShaderCode = nullptr);
 	void compileShader(const char* shaderCode, GLuint shaderID);
-	RenderableInfo* addRenderable(GeometryInfo* whatGeometry, const Matrix4& whereMatrix, ShaderInfo* howshaders, bool& isVisible, Vector4 color, int texture, bool useMap = false);
+	RenderableInfo* addRenderable(GeometryInfo* whatGeometry, const Matrix4& whereMatrix, ShaderInfo* howShaders, bool& isVisible, Vector4 color, int& texture, bool useMap = false);
+	RenderableInfo* addLight(GeometryInfo* whatGeometry, const Matrix4& whereMatrix, ShaderInfo* howShaders, bool& isVisible, Vector4 color);
 	void addShaderStreamedParameter(GeometryInfo* geometry,	glm::uint layoutLocation, ParameterType parameterType, glm::uint bufferOffset, glm:: uint bufferStride);
 	void addRenderableUniformParameter(RenderableInfo* renderable, const char* name, ParameterType parameterType, const float* value);
 	int addTexture(const char* fileName);
@@ -96,9 +90,6 @@ public:
 	void setupFrameBuffer();
 
 	string readShaderCode(const char* fileName);
-	void addChar(const RenderableInfo &character);
-	void updateChar(int index, RenderableInfo character);
-	void clearChars();
 	void drawStuff();
 	void drawMap();
 //Mouse & Keyboard Inputs
@@ -107,16 +98,13 @@ public:
 	//int getIntersectingSphere(const Vector3 &rayDirection, const Vector3 &rayOrigin);
 	void mousePressEvent(QMouseEvent* e);
 	void mouseReleaseEvent(QMouseEvent* e);
-	void updateDimensions(int length, int width, int height);
-	void updateDimensions(Vector3 newDimensions);
 	void updateCameraSpeed(float newSpeed);
 	int getMaxRenderables();
+	void clearRenderables();
+	void clearGeometries();
+	void clearShaders();
 private slots:
 	void Update();
-signals:
-	void characterSelected();
-	void moveMade();
-	void attacked();
 };
 
 #endif

@@ -67,30 +67,68 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Cell.cpp" />
+    <ClCompile Include="CorridorFloorTextureEditor.cpp" />
+    <ClCompile Include="CorridorFloorTextureEditor_moc.cpp" />
+    <ClCompile Include="Cube.cpp" />
+    <ClCompile Include="CubeBuilder.cpp" />
+    <ClCompile Include="CylinderBuilder.cpp" />
+    <ClCompile Include="DomeBuilder.cpp" />
     <ClCompile Include="DoubleLabeledSpinbox.cpp" />
+    <ClCompile Include="Dungeon.cpp" />
+    <ClCompile Include="DungeonGraph.cpp" />
+    <ClCompile Include="DungeonGraph_moc.cpp" />
+    <ClCompile Include="DungeonMaker.cpp" />
+    <ClCompile Include="DungeonMaker_moc.cpp" />
     <ClCompile Include="DungeonRoom.cpp" />
+    <ClCompile Include="Dungeon_moc.cpp" />
     <ClCompile Include="GeometryEditor.cpp" />
+    <ClCompile Include="GeometryEditor_moc.cpp" />
+    <ClCompile Include="LabeledCheckBox.cpp" />
+    <ClCompile Include="LabeledCheckBox_moc.cpp" />
     <ClCompile Include="LabeledSpinbox.cpp" />
     <ClCompile Include="LabeledSpinbox_moc.cpp" />
     <ClCompile Include="noiseutils.cpp" />
     <ClCompile Include="Plane.cpp" />
+    <ClCompile Include="RoomFloorTextureEditor.cpp" />
+    <ClCompile Include="RoomFloorTextureEditor_moc.cpp" />
+    <ClCompile Include="SphereBuilder.cpp" />
     <ClCompile Include="TextureEditor.cpp" />
     <ClCompile Include="MainWindow.cpp" />
     <ClCompile Include="TextureEditor_moc.cpp" />
     <ClCompile Include="Vertex.cpp" />
+    <ClCompile Include="WallTextureEditor.cpp" />
+    <ClCompile Include="WallTextureEditor_moc.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CorridorFloorTextureEditor.h" />
+    <ClInclude Include="Cube.h" />
+    <ClInclude Include="CubeBuilder.h" />
+    <ClInclude Include="CylinderBuilder.h" />
+    <ClInclude Include="DomeBuilder.h" />
     <ClInclude Include="DoubleLabeledSpinbox.h" />
+    <ClInclude Include="Dungeon.h" />
+    <ClInclude Include="DungeonGraph.h" />
+    <ClInclude Include="DungeonMaker.h" />
+    <ClInclude Include="DungeonNode.h" />
     <ClInclude Include="DungeonRoom.h" />
     <ClInclude Include="GeometryEditor.h" />
+    <ClInclude Include="LabeledCheckBox.h" />
     <ClInclude Include="LabeledSpinbox.h" />
     <ClInclude Include="noiseutils.h" />
     <ClInclude Include="Plane.h" />
+    <ClInclude Include="RoomFloorTextureEditor.h" />
+    <ClInclude Include="SphereBuilder.h" />
     <ClInclude Include="TextureEditor.h" />
     <ClInclude Include="Vertex.h" />
+    <ClInclude Include="Cell.h" />
+    <ClInclude Include="WallTextureEditor.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="LightFragmentShaderCode.glsl" />
+    <None Include="LightVertexShaderCode.glsl" />
     <None Include="SimpleFragmentShaderCode.glsl" />
+    <None Include="SimpleGeometryShaderCode.glsl" />
     <None Include="SimpleVertexShaderCode.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

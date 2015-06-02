@@ -22,12 +22,16 @@ class DungeonRoom
 	RenderableInfo* back;
 
 	bool showRoof;
+	int text;
 public:
 	DungeonRoom(bool showRoof = true);
 	DungeonRoom(std::vector<GeometryInfo*> walls, bool showRoof);
 	DungeonRoom(std::vector<GeometryInfo*> walls);
+	DungeonRoom(GeometryInfo* sphere);
 	void CreateSquareRoom();
 	void CreateDomeRoom();
+	void CreateSphere();
+	void CreateColumn();
 	void AddShaderStreamedParameters(GeometryInfo* info);
 };
 

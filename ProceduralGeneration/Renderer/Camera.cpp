@@ -8,7 +8,7 @@ Camera::Camera(void) :
 	up(0.0f, 1.0f, 0.0)
 {
 	moveDirection = glm::cross(viewDirection, up);
-	Speed = 0.01f;
+	Speed = 0.50f;
 	is3D = true;
 }
 
@@ -46,6 +46,7 @@ void Camera::updateCameraSpeed(float newSpeed)
 
 void Camera::update()
 {
+	qDebug()<<Speed;
 	if(GetAsyncKeyState('W'))
 	{
 		moveForward();
@@ -71,6 +72,55 @@ void Camera::update()
 	else if(GetAsyncKeyState('E'))
 	{
 		moveDown();
+	}
+
+	if(GetAsyncKeyState(0x30))
+	{
+		Speed = 10;
+	}
+	else if(GetAsyncKeyState(0x31))
+	{
+		Speed = 1;
+	}
+	else if(GetAsyncKeyState(0x32))
+	{
+		Speed = 2;
+	}
+	else if(GetAsyncKeyState(0x33))
+	{
+		Speed = 3;
+	}
+	else if(GetAsyncKeyState(0x34))
+	{
+		Speed = 4;
+	}
+	else if(GetAsyncKeyState(0x35))
+	{
+		Speed = 5;
+	}
+	else if(GetAsyncKeyState(0x36))
+	{
+		Speed = 6;
+	}
+	else if(GetAsyncKeyState(0x37))
+	{
+		Speed = 7;
+	}
+	else if(GetAsyncKeyState(0x38))
+	{
+		Speed = 8;
+	}
+	else if(GetAsyncKeyState(0x39))
+	{
+		Speed = 9;
+	}
+	else if(GetAsyncKeyState(VK_OEM_PLUS))
+	{
+		Speed += 0.01f;
+	}
+	else if (GetAsyncKeyState(VK_OEM_MINUS))
+	{
+		Speed -= 0.01f;
 	}
 
 	//qDebug()<<"Camera Position: "<<position.x<<", "<<position.y<<", "<<position.z;

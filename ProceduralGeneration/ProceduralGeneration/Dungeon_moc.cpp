@@ -1,15 +1,15 @@
 /****************************************************************************
-** Meta object code from reading C++ file 'RendererWindow.h'
+** Meta object code from reading C++ file 'Dungeon.h'
 **
-** Created: Wed May 20 13:18:02 2015
+** Created: Thu Apr 30 13:08:32 2015
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.0)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include "RendererWindow.h"
+#include "Dungeon.h"
 #if !defined(Q_MOC_OUTPUT_REVISION)
-#error "The header file 'RendererWindow.h' doesn't include <QObject>."
+#error "The header file 'Dungeon.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 63
 #error "This file was generated using the moc from 4.8.0. It"
 #error "cannot be used with the include files from this version of Qt."
@@ -17,13 +17,13 @@
 #endif
 
 QT_BEGIN_MOC_NAMESPACE
-static const uint qt_meta_data_RendererWindow[] = {
+static const uint qt_meta_data_Dungeon[] = {
 
  // content:
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-       1,   14, // methods
+       2,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -31,63 +31,65 @@ static const uint qt_meta_data_RendererWindow[] = {
        0,       // signalCount
 
  // slots: signature, parameters, type, tag, flags
-      16,   15,   15,   15, 0x08,
+       9,    8,    8,    8, 0x08,
+      25,    8,    8,    8, 0x08,
 
        0        // eod
 };
 
-static const char qt_meta_stringdata_RendererWindow[] = {
-    "RendererWindow\0\0Update()\0"
+static const char qt_meta_stringdata_Dungeon[] = {
+    "Dungeon\0\0updateDungeon()\0updateSettings()\0"
 };
 
-void RendererWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+void Dungeon::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     if (_c == QMetaObject::InvokeMetaMethod) {
         Q_ASSERT(staticMetaObject.cast(_o));
-        RendererWindow *_t = static_cast<RendererWindow *>(_o);
+        Dungeon *_t = static_cast<Dungeon *>(_o);
         switch (_id) {
-        case 0: _t->Update(); break;
+        case 0: _t->updateDungeon(); break;
+        case 1: _t->updateSettings(); break;
         default: ;
         }
     }
     Q_UNUSED(_a);
 }
 
-const QMetaObjectExtraData RendererWindow::staticMetaObjectExtraData = {
+const QMetaObjectExtraData Dungeon::staticMetaObjectExtraData = {
     0,  qt_static_metacall 
 };
 
-const QMetaObject RendererWindow::staticMetaObject = {
-    { &QGLWidget::staticMetaObject, qt_meta_stringdata_RendererWindow,
-      qt_meta_data_RendererWindow, &staticMetaObjectExtraData }
+const QMetaObject Dungeon::staticMetaObject = {
+    { &QMainWindow::staticMetaObject, qt_meta_stringdata_Dungeon,
+      qt_meta_data_Dungeon, &staticMetaObjectExtraData }
 };
 
 #ifdef Q_NO_DATA_RELOCATION
-const QMetaObject &RendererWindow::getStaticMetaObject() { return staticMetaObject; }
+const QMetaObject &Dungeon::getStaticMetaObject() { return staticMetaObject; }
 #endif //Q_NO_DATA_RELOCATION
 
-const QMetaObject *RendererWindow::metaObject() const
+const QMetaObject *Dungeon::metaObject() const
 {
     return QObject::d_ptr->metaObject ? QObject::d_ptr->metaObject : &staticMetaObject;
 }
 
-void *RendererWindow::qt_metacast(const char *_clname)
+void *Dungeon::qt_metacast(const char *_clname)
 {
     if (!_clname) return 0;
-    if (!strcmp(_clname, qt_meta_stringdata_RendererWindow))
-        return static_cast<void*>(const_cast< RendererWindow*>(this));
-    return QGLWidget::qt_metacast(_clname);
+    if (!strcmp(_clname, qt_meta_stringdata_Dungeon))
+        return static_cast<void*>(const_cast< Dungeon*>(this));
+    return QMainWindow::qt_metacast(_clname);
 }
 
-int RendererWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+int Dungeon::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
-    _id = QGLWidget::qt_metacall(_c, _id, _a);
+    _id = QMainWindow::qt_metacall(_c, _id, _a);
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 1)
+        if (_id < 2)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 1;
+        _id -= 2;
     }
     return _id;
 }

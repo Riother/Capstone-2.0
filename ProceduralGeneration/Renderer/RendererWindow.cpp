@@ -1,8 +1,7 @@
 #include "RendererWindow.h"
 
-const int MAX_INFOS = 10;
-const int MAX_RENDERABLES = 1000;
-const int MAX_DIMENSION_VALUE = 10;
+const int MAX_INFOS = 3000;
+const int MAX_RENDERABLES = 3000;
 const int MEGABYTE = 1048576;
 
 RendererWindow * RendererWindow::rendererInstance;
@@ -19,19 +18,12 @@ void RendererWindow::initializeGL()
 
 	cubeCount = 0;
 	renderableCount = 0;
+	lightCount = 0;
 	geometryCount = 0;
 	shaderCount = 0;
 	cameraSpeed = 0.01f;
 	perspectiveMatrix = glm::perspective(90.0f, (float)(width())/height(), 0.1f, 1000.0f);
 	highlightedColor = Vector4(0, 0, 1, 1);
-
-	selectedX = -1;
-	selectedY = -1;
-	selectedZ = -1;
-	isCharSelection = false;
-	isMovement = false;
-	isAttack = false;
-	isEditor = false;
 
 	setVisibility = true;
 
@@ -101,10 +93,11 @@ GeometryInfo* RendererWindow::addGeometry(const void* verts, GLuint vertexDataSi
 	return &geometryInfos[geometryCount++];
 }
 
-ShaderInfo* RendererWindow::createShaderInfo(const char* vertexShaderCode, const char* fragmentShaderCode)
+ShaderInfo* RendererWindow::createShaderInfo(const char* vertexShaderCode, const char* fragmentShaderCode, const char* geometryShaderCode)
 {
 	GLuint vertexShaderID = glCreateShader(GL_VERTEX_SHADER);
 	GLuint fragShaderID = glCreateShader(GL_FRAGMENT_SHADER);
+	GLuint geoShaderID = geometryShaderCode ? glCreateShader(GL_GEOMETRY_SHADER) : 0;
 	
 	//string tempShaderCode = readShaderCode(vertexShaderCode);
 	//const char* adapter[1];
@@ -116,12 +109,27 @@ ShaderInfo* RendererWindow::createShaderInfo(const char* vertexShaderCode, const
 
 	compileShader(vertexShaderCode, vertexShaderID);
 	compileShader(fragmentShaderCode, fragShaderID);
+	
+	if(geoShaderID)
+	{
+		compileShader(geometryShaderCode, geoShaderID);
+	}
+
 
 	shaderInfos[shaderCount] = ShaderInfo(glCreateProgram());
 	glAttachShader(shaderInfos[shaderCount].programID, vertexShaderID);
 	glAttachShader(shaderInfos[shaderCount].programID, fragShaderID);
 
+	if(geoShaderID)
+	{
+		glAttachShader(shaderInfos[shaderCount].programID, geoShaderID);
+	}
+
 	glLinkProgram(shaderInfos[shaderCount].programID);
+
+	glDeleteShader(vertexShaderID);
+	glDeleteShader(fragShaderID);
+	glDeleteShader(geoShaderID);
 
 	return &shaderInfos[shaderCount++];
 }
@@ -149,10 +157,19 @@ void RendererWindow::compileShader(const char* shaderCode, GLuint shaderID)
 	}
 }
 
-RenderableInfo* RendererWindow::addRenderable(GeometryInfo* whatGeometry, const Matrix4& whereMatrix, ShaderInfo* howShaders, bool& isVisible, Vector4 color, int texture, bool useMap)
+RenderableInfo* RendererWindow::addRenderable(GeometryInfo* whatGeometry, const Matrix4& whereMatrix, ShaderInfo* howShaders, bool& isVisible, Vector4 color, int& texture, bool useMap)
 {
 	renderableInfos[renderableCount] = RenderableInfo(whatGeometry, whereMatrix, howShaders, isVisible, texture, color, useMap);
+	
 	return &renderableInfos[renderableCount++];
+}
+
+RenderableInfo* RendererWindow::addLight(GeometryInfo* whatGeometry, const Matrix4& whereMatrix, ShaderInfo* howShaders, bool& isVisible, Vector4 color)
+{
+	int temp = -1;
+	lightInfos[lightCount] = RenderableInfo(whatGeometry, whereMatrix, howShaders, isVisible, temp, color, false);
+	
+	return &renderableInfos[lightCount++];
 }
 
 void RendererWindow::addShaderStreamedParameter(GeometryInfo* geometry, uint layoutLocation, ParameterType parameterType, uint bufferOffset, uint bufferStride)
@@ -218,6 +235,7 @@ int RendererWindow::addTexture(const char* fileName)
 	image = QGLWidget::convertToGLFormat(image);
 	int w = image.width();
 	int h = image.height();
+
 	GLuint textureID;
 	glGenTextures(1, &textureID);
 	glActiveTexture(textureID);
@@ -330,18 +348,19 @@ void RendererWindow::drawStuff()
 			addRenderableUniformParameter(&temp, "cameraPosition", ParameterType::PT_VECTOR3, &camera.getPosition()[0]);
 
 			//addRenderableUniformParameter(&renderableInfos[i], "pureTrans", ParameterType::PT_MATRIX4, &(renderableInfos[i].whereMatrix)[0][0]);
-			//addRenderableUniformParameter(&renderableInfos[i], "lightPosition", ParameterType::PT_VECTOR3, &lightPosition[0]);
+			if(temp.lightLocation != -1)
+				addRenderableUniformParameter(&temp, "lightPosition", ParameterType::PT_VECTOR3, &lightInfos[temp.lightLocation].position[0]);
 			//addRenderableUniformParameter(&renderableInfos[i], "lightColor", ParameterType::PT_VECTOR3, &lightPosition[0]);
 			//addRenderableUniformParameter(&renderableInfos[i], "specularLight", ParameterType::PT_VECTOR3, &specularLight[0]);
 			//addRenderableUniformParameter(&renderableInfos[i], "diffuseLight", ParameterType::PT_VECTOR3, &diffuseLight[0]);
 			//addRenderableUniformParameter(&renderableInfos[i], "ambientLight", ParameterType::PT_VECTOR3, &ambientLight[0]);
 			//addRenderableUniformParameter(&renderableInfos[i], "specularExponent", ParameterType::PT_FLOAT, &specularExponent);
 			addRenderableUniformParameter(&temp, "color", ParameterType::PT_VECTOR3, &temp.color[0]);
-			//addRenderableUniformParameter(&renderableInfos[i], "modelToWorld", ParameterType::PT_MATRIX4, &renderableInfos[i].whereMatrix[0][0]);
+			addRenderableUniformParameter(&temp, "modelToWorld", ParameterType::PT_MATRIX4, &temp.whereMatrix[0][0]);
 			//addRenderableUniformParameter(&renderableInfos[i], "octave", ParameterType::PT_FLOAT, &octave);
 			//addRenderableUniformParameter(&renderableInfos[i], "meltingRange", ParameterType::PT_FLOAT, &meltingRange);
 
-			if(temp.textureID == -1)
+			if(*temp.textureID == -1)
 			{
 				//dont use image
 				float useImage = 0;
@@ -352,8 +371,8 @@ void RendererWindow::drawStuff()
 				//use image
 				float useImage = 1;
 				addRenderableUniformParameter(&temp, "useImage", ParameterType::PT_FLOAT, &useImage);
-
-				glActiveTexture(temp.textureID);
+				glActiveTexture(*temp.textureID);
+				glBindTexture(GL_TEXTURE_2D, *temp.textureID);
 			}
 
 			glBindVertexArray(temp.whatGeometry->vertexArrayID);
@@ -371,23 +390,38 @@ void RendererWindow::Update()
 {
 	if(leftClick)
 		camera.update();
-	camera.updateCameraSpeed(cameraSpeed);
 	repaint();
-}
 
-void RendererWindow::addChar(const RenderableInfo &character)
-{
-	characters.append(character);
-}
+	
 
-void RendererWindow::updateChar(int index, RenderableInfo character)
-{
-	characters.replace(index, character);
-}
+	//camera.updateCameraSpeed(cameraSpeed);
 
-void RendererWindow::clearChars()
-{
-	characters.clear();
+	/*if(GetAsyncKeyState(VK_UP))
+	{
+		lightPosition.z -= 0.01f;
+	}
+	else if(GetAsyncKeyState(VK_DOWN))
+	{
+		lightPosition.z += 0.01f;
+	}
+
+	if(GetAsyncKeyState(VK_LEFT))
+	{
+		lightPosition.x -= 0.01f;
+	}
+	else if(GetAsyncKeyState(VK_RIGHT))
+	{
+		lightPosition.x += 0.01f;
+	}
+
+	if(GetAsyncKeyState(VK_BROWSER_BACK))
+	{
+		lightPosition.y -= 0.01f;
+	}
+	else if(GetAsyncKeyState(VK_BROWSER_FORWARD))
+	{
+		lightPosition.y += 0.01f;
+	}*/
 }
 
 void RendererWindow::mouseMoveEvent(QMouseEvent* e)
@@ -570,26 +604,27 @@ void RendererWindow::mouseReleaseEvent(QMouseEvent* e)
 	}
 }
 
-void RendererWindow::updateDimensions(int length, int width, int height)
-{
-	mapLength = length;
-	mapWidth = width;
-	mapHeight = height;
-}
-
-void RendererWindow::updateDimensions(Vector3 newDimensions)
-{
-	mapLength = newDimensions.z;
-	mapWidth = newDimensions.x;
-	mapHeight = newDimensions.y;
-}
-
 void RendererWindow::updateCameraSpeed(float newSpeed)
 {
-	cameraSpeed = newSpeed;
+	camera.updateCameraSpeed(newSpeed);
 }
 
 int RendererWindow::getMaxRenderables()
 {
 	return MAX_RENDERABLES;
+}
+
+void RendererWindow::clearRenderables()
+{
+	renderableCount = 0;
+}
+
+void RendererWindow::clearGeometries()
+{
+	geometryCount = 0;
+}
+
+void RendererWindow::clearShaders()
+{
+	shaderCount = 0;
 }

@@ -1,12 +1,17 @@
 #include <Qt\qapplication.h>
 #include "TextureEditor.h"
 #include "GeometryEditor.h"
-#include "RendererWindow.h"
+#include "DungeonMaker.h"
 
 int main(int argc, char* argv[])
 {
 	QApplication app(argc, argv);
-	GeometryEditor widg;
+
+	DungeonMaker widg;
+	//Dungeon widg;
+	//DungeonGraph widg;
+	//GeometryEditor widg;
+	//TextureEditor widg;
 
 	return app.exec();
 }
